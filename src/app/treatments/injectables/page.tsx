@@ -1,0 +1,235 @@
+'use client';
+
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import BookingCTA from '@/components/BookingCTA';
+import CherryFinancing from '@/components/CherryFinancing';
+
+const fadeUp = {
+    hidden: { opacity: 0, y: 30 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' as const } },
+};
+
+const navColumns = [
+    { image: 'https://zpcxjvbgxvfrcnlixnrb.supabase.co/storage/v1/object/public/treatments/hero/injectables.png',     mobileImage: 'https://zpcxjvbgxvfrcnlixnrb.supabase.co/storage/v1/object/public/site-assets/updated-photos/medical-eyecare.svg',  title: 'Medical\nEye Care',          tagline: 'Vision & Precision',  href: '/treatments/medical-eye-care' },
+    { image: 'https://zpcxjvbgxvfrcnlixnrb.supabase.co/storage/v1/object/public/treatments/hero/eyelid-surgery.png',  mobileImage: 'https://zpcxjvbgxvfrcnlixnrb.supabase.co/storage/v1/object/public/site-assets/updated-photos/eyelid-surgery.svg',   title: 'Eyelid\nSurgery',            tagline: 'Surgical Artistry',   href: '/treatments/eyelid-surgery', objectPosition: '25% 55%', imageScale: 1.2 },
+    { image: 'https://zpcxjvbgxvfrcnlixnrb.supabase.co/storage/v1/object/public/treatments/hero/non-surgical.png',    mobileImage: 'https://zpcxjvbgxvfrcnlixnrb.supabase.co/storage/v1/object/public/treatments/hero/non-surgical.png',        title: 'Non-Surgical\nRejuvenation', tagline: 'Minimal Downtime',    href: '/treatments/non-surgical' },
+    { image: 'https://zpcxjvbgxvfrcnlixnrb.supabase.co/storage/v1/object/public/site-assets/hero_section_injectables.svg', mobileImage: 'https://zpcxjvbgxvfrcnlixnrb.supabase.co/storage/v1/object/public/site-assets/hero_section_injectables.svg', title: 'Neuromodulators\n& Dermal Fillers', tagline: 'Natural Results',     href: '/treatments/injectables', imageScale: 1.0 },];
+
+const procedures = [
+    {
+        title: 'Tear Trough Filler for Under-Eye Hollows',
+        recoveryTime: '1–2 weeks',
+        description: 'Tear Trough Filler for Under-Eye Hollows uses dermal filler to restore volume beneath the eyes, reducing hollowness and dark shadows for a smoother, more refreshed appearance.',
+        image: 'https://zpcxjvbgxvfrcnlixnrb.supabase.co/storage/v1/object/public/treatments/injectables/injectables-01.svg',
+        learnMoreHref: '/treatments/injectables/tear-trough-filler',
+        patientPhotosHref: null,
+    },
+    {
+        title: 'Neuromodulators and Dermal Fillers',
+        recoveryTime: '1–2 weeks',
+        description: 'Neuromodulators relax targeted facial muscles to soften expression lines, while dermal fillers restore volume for smoother, more balanced, natural-looking results.',
+        image: 'https://zpcxjvbgxvfrcnlixnrb.supabase.co/storage/v1/object/public/treatments/injectables/injectables-02.svg',
+        learnMoreHref: '/treatments/injectables/botox',
+        patientPhotosHref: '/gallery/botox',
+    },
+    {
+        title: 'Dysport for Dynamic Wrinkles',
+        recoveryTime: '1–2 weeks',
+        description: 'Dysport for Dynamic Wrinkles relaxes facial muscles responsible for expression lines, helping smooth wrinkles such as frown lines and crow\'s feet for a more relaxed appearance.',
+        image: 'https://zpcxjvbgxvfrcnlixnrb.supabase.co/storage/v1/object/public/treatments/injectables/injectables-03.svg',
+        learnMoreHref: '/treatments/injectables/dysport',
+        patientPhotosHref: null,
+    },
+    {
+        title: 'Filler Revision and Correction',
+        recoveryTime: '1–2 weeks',
+        description: 'Filler Revision and Correction adjusts or dissolves previous dermal filler to correct uneven results, overfilling, or misplaced product and restore a more natural facial balance.',
+        image: 'https://zpcxjvbgxvfrcnlixnrb.supabase.co/storage/v1/object/public/treatments/injectables/injectables-04.svg',
+        learnMoreHref: '/treatments/injectables/filler-revision',
+        patientPhotosHref: null,
+    },
+    {
+        title: 'Hyaluronidase for Filler Dissolution',
+        recoveryTime: '1–2 weeks',
+        description: 'Hyaluronidase for Filler Dissolution uses an enzyme that safely breaks down hyaluronic acid fillers to reverse or adjust previous filler treatments.',
+        image: 'https://zpcxjvbgxvfrcnlixnrb.supabase.co/storage/v1/object/public/treatments/injectables/injectables-05.svg',
+        learnMoreHref: '/treatments/injectables/hyaluronidase',
+        patientPhotosHref: null,
+    },
+    {
+        title: 'Restylane®',
+        recoveryTime: '1–2 weeks',
+        description: 'Restylane® is a hyaluronic acid dermal filler used to restore facial volume, smooth wrinkles, and enhance natural contours such as the lips, cheeks, and under-eye area.',
+        image: 'https://zpcxjvbgxvfrcnlixnrb.supabase.co/storage/v1/object/public/treatments/injectables/injectables-06.svg',
+        learnMoreHref: '/treatments/injectables/restylane',
+        patientPhotosHref: '/gallery/botox',
+    },
+    {
+        title: 'Belotero®',
+        recoveryTime: '1–2 weeks',
+        description: 'Belotero® is a hyaluronic acid dermal filler designed to smooth fine lines and restore subtle facial volume while blending seamlessly into the skin for natural-looking results.',
+        image: 'https://zpcxjvbgxvfrcnlixnrb.supabase.co/storage/v1/object/public/treatments/injectables/injectables-07.svg',
+        learnMoreHref: '/treatments/injectables/belotero',
+        patientPhotosHref: '/gallery/belotero',
+    },
+    {
+        title: 'Perlane®',
+        recoveryTime: '1–2 weeks',
+        description: 'Perlane® is a hyaluronic acid dermal filler used to restore deeper facial volume and smooth moderate to severe wrinkles for a fuller, more youthful appearance.',
+        image: 'https://zpcxjvbgxvfrcnlixnrb.supabase.co/storage/v1/object/public/treatments/injectables/injectables-08.svg',
+        learnMoreHref: '/treatments/injectables/perlane',
+        patientPhotosHref: '/gallery/perlane',
+    },
+    {
+        title: 'Radiesse®',
+        recoveryTime: '1–2 weeks',
+        description: 'Radiesse® is a calcium-based dermal filler that restores facial volume and stimulates natural collagen production to improve skin firmness and contour.',
+        image: 'https://zpcxjvbgxvfrcnlixnrb.supabase.co/storage/v1/object/public/treatments/injectables/injectables-09.svg',
+        learnMoreHref: '/treatments/injectables/dermal-fillers',
+        patientPhotosHref: null,
+    },
+    {
+        title: 'Sculptra®',
+        recoveryTime: '1–2 weeks',
+        description: 'Sculptra® is an injectable treatment that stimulates the body\'s natural collagen production to gradually restore facial volume and improve skin structure over time.',
+        image: 'https://zpcxjvbgxvfrcnlixnrb.supabase.co/storage/v1/object/public/treatments/injectables/injectables-10.svg',
+        learnMoreHref: '/treatments/injectables/dermal-fillers',
+        patientPhotosHref: null,
+    },
+];
+
+export default function InjectablesPage() {
+    return (
+        <main className="min-h-screen bg-white">
+            <Navbar />
+
+                        {/* ─── CATEGORY NAV ────────────────────────────────────────────────────── */}
+            <section className="relative w-full h-[90vh] min-h-[500px] grid grid-cols-2 md:flex overflow-hidden">
+                {navColumns.map((col, idx) => (
+                    <Link
+                        key={idx}
+                        href={col.href}
+                        className="relative flex-1 overflow-hidden group cursor-pointer"
+                    >
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.8, delay: idx * 0.15 }}
+                            className="relative w-full h-full"
+                        >
+                            {/* Mobile image */}
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                                src={col.mobileImage}
+                                alt={col.title.replace('\\n', ' ')}
+                                className="md:hidden absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                style={{ objectPosition: col.objectPosition ?? 'center', transform: col.imageScale ? `scale(${col.imageScale})` : undefined }}
+                            />
+                            {/* Desktop image */}
+                            <Image
+                                src={col.image}
+                                alt={col.title.replace('\\n', ' ')}
+                                fill
+                                className="hidden md:block object-cover transition-transform duration-700 group-hover:scale-105"
+                                style={{ objectPosition: col.objectPosition ?? 'center', transform: col.imageScale ? `scale(${col.imageScale})` : undefined }}
+                                priority={idx === 3}
+                            />
+                            <div className="absolute inset-0 bg-[#2A2E37]/60 group-hover:bg-[#2A2E37]/75 transition-colors duration-500" />
+                            {idx < navColumns.length - 1 && (
+                                <div className="hidden md:block absolute right-0 top-[15%] bottom-[15%] w-px bg-white/20 z-10" />
+                            )}
+                            <div className="absolute bottom-0 left-0 right-0 z-10 px-2 pb-2 md:px-6 md:pb-10">
+                                <div className="w-4 h-px bg-[#CEB776] mb-1 md:w-10 md:mb-4" />
+                                <h3 className="font-sans font-extrabold text-white uppercase leading-tight mb-1 md:mb-3 whitespace-pre-line text-sm md:text-[clamp(22px,2.5vw,40px)]">
+                                    {col.title}
+                                </h3>
+                                <p className="block font-sans font-normal text-white/80 text-[10px] md:text-base lg:text-[20px] mb-1 md:mb-4">
+                                    {col.tagline}
+                                </p>
+                                <div className="w-4 h-px bg-[#CEB776] md:w-10" />
+                            </div>
+                        </motion.div>
+                    </Link>
+                ))}
+            </section>
+
+            {/* ─── PAGE HEADER ─────────────────────────────────────────────────────── */}
+            <section className="bg-white pt-10 pb-10 md:py-20">
+                <div className="max-w-[1440px] mx-auto px-8 md:px-16 text-center">
+                    <motion.div
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true }}
+                        variants={{ show: { transition: { staggerChildren: 0.1 } } }}
+                    >
+                        <motion.h1
+                            variants={fadeUp}
+                            className="font-sans font-black text-4xl md:text-[64px] uppercase leading-none text-[#070707] mb-4"
+                        >
+                            NEUROMODULATORS &amp; DERMAL FILLERS.
+                        </motion.h1>
+                        <motion.p
+                            variants={fadeUp}
+                            className="font-sans text-[16px] md:text-[20px] text-[#2A2E37] leading-relaxed max-w-[860px] mx-auto"
+                        >
+                            Dr. Gordon&apos;s expert touch delivers smooth, natural results that enhance harmony and balance while safely preserving individuality.<br className="hidden md:block" /> Each injectable is delivered with precision, offering a subtle lift that still feels authentically you.
+                        </motion.p>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* ─── PROCEDURE CARDS ─────────────────────────────────────────────────── */}
+            <section className="bg-[#F7F5F2] pt-10 pb-10 md:pb-20">
+                <div className="max-w-[1440px] mx-auto px-8 md:px-16 flex flex-col gap-6">
+                    {procedures.map((proc, idx) => (
+                        <motion.div
+                            key={proc.title}
+                            initial={{ opacity: 0, y: 24 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: idx * 0.04 }}
+                            className="bg-white shadow-sm flex flex-col md:flex-row overflow-hidden"
+                        >
+                            <div className="w-full md:w-[280px] h-[200px] md:h-auto flex-shrink-0 bg-gray-50 flex items-center justify-center">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img src={proc.image} alt={proc.title} className="w-full h-full object-contain" />
+                            </div>
+                            <div className="flex-1 p-7 md:p-10 flex flex-col justify-between">
+                                <div>
+                                    <h2 className="font-sans font-black text-[22px] md:text-[28px] uppercase text-[#070707] leading-tight mb-2">
+                                        {proc.title}
+                                    </h2>
+                                    <p className="font-sans font-bold text-[16px] uppercase tracking-[0.18em] text-[#8B1D2D] mb-4">
+                                        Recovery Time &nbsp;|&nbsp; {proc.recoveryTime}
+                                    </p>
+                                    <p className="font-sans text-[15px] md:text-[16px] text-[#2A2E37] leading-relaxed">
+                                        {proc.description}
+                                    </p>
+                                </div>
+                                <div className="flex flex-wrap gap-3 mt-6">
+                                    {proc.patientPhotosHref && (
+                                        <Link href={proc.patientPhotosHref} className="inline-block bg-[#8B1D2D] text-white font-bold uppercase tracking-wider text-xs py-3 px-6 rounded-full hover:bg-[#2A2E37] transition-colors">
+                                            Actual Patient Photos
+                                        </Link>
+                                    )}
+                                    <Link href={proc.learnMoreHref} className="inline-block bg-[#8B1D2D] text-white font-bold uppercase tracking-wider text-xs py-3 px-6 rounded-full hover:bg-[#2A2E37] transition-colors">
+                                        Learn More
+                                    </Link>
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+            </section>
+
+            <BookingCTA />
+            <CherryFinancing />
+            <Footer />
+        </main>
+    );
+}
