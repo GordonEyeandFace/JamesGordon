@@ -1,0 +1,42 @@
+{
+  "name": "temp_next_app",
+  "version": "0.1.1",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3000 -H :: --webpack",
+    "dev:3001": "next dev -p 3001 -H :: --webpack",
+    "build": "next build --webpack",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "echo 'No test suite configured yet' && exit 0",
+    "validate": "npm run lint && npm run typecheck"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.105.4",
+    "@types/nodemailer": "^8.0.0",
+    "framer-motion": "^12.34.0",
+    "lucide-react": "^0.564.0",
+    "mime": "^4.1.0",
+    "next": "16.2.6",
+    "nodemailer": "^8.0.7",
+    "pdf-parse": "^1.1.1",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-use-measure": "^2.1.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.6",
+    "playwright": "^1.58.2",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  },
+  "overrides": {
+    "postcss": "8.5.14"
+  }
+}

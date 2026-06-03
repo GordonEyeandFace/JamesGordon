@@ -1,0 +1,12 @@
+
+> temp_next_app@0.1.1 dev
+> next dev -p 3000 -H 0.0.0.0 --webpack
+
+▲ Next.js 16.1.6 (webpack)
+- Local:         http://localhost:3000
+- Network:       http://0.0.0.0:3000
+
+✓ Starting...
+⨯ Unable to acquire lock at /Volumes/Cob-SSD/Projects/personal/gordon-aistudio-draft/.next/dev/lock, is another instance of next dev running?
+  Suggestion: If you intended to restart next dev, terminate the other process, and then try again.
+[?25h
